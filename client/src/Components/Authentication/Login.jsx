@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -38,6 +38,7 @@ export default function SimpleCard() {
           console.log("Logged in successfully!");
           localStorage.setItem("token", res.data.token);
           navigate("/");
+          window.location.reload(false);
         },
         (error) => {
           setError(error.response.data.errors[0]);
@@ -105,10 +106,10 @@ export default function SimpleCard() {
               </Stack>
               {showError && <FormLabel color={"red"}> {showError}</FormLabel>}
               <Button
-                bg={"red.300"}
+                bg={"red.400"}
                 color={"white"}
                 _hover={{
-                  bg: "red.400",
+                  bg: "red.300",
                 }}
                 onClick={handleLogin}
               >
@@ -117,9 +118,9 @@ export default function SimpleCard() {
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                New user?
-                <Link color={"blue.400"}>
-                  <RouterLink to="/signup"> Sign up </RouterLink>
+                New user?{" "}
+                <Link color={"blue.400"} onClick={() => navigate("/signup")}>
+                  Sign up
                 </Link>
               </Text>
             </Stack>

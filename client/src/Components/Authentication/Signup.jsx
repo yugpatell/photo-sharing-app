@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function SignupCard() {
@@ -143,8 +143,10 @@ export default function SignupCard() {
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                Already a user?
-                <RouterLink to="/login"> Login </RouterLink>
+                Already a user?{" "}
+                <Link color={"blue.400"} onClick={() => navigate("/login")}>
+                  Login
+                </Link>
               </Text>
             </Stack>
           </Stack>

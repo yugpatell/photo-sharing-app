@@ -3,6 +3,7 @@ const { body, validationResult } = require("express-validator");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const checkAuth = require("../checkAuth");
 
 const User = require("../models/user");
 
@@ -30,7 +31,7 @@ router.post(
     const findUser = await User.findOne({ email: email });
 
     if (findUser) {
-      return res.status(400).json({
+      return res.status(401).json({
         errors: ["Email already exists."],
       });
     }
@@ -46,7 +47,7 @@ router.post(
 
     const token = await jwt.sign(
       { email: newUser.email },
-      `${process.env.JWT_SECRET}`,
+      `${process.env.JWT_SECRET_KEY}`,
       {
         expiresIn: "1h",
       }
@@ -68,7 +69,7 @@ router.post("/login", async (req, res) => {
   const findUser = await User.findOne({ email: email });
 
   if (!findUser) {
-    return res.status(400).json({
+    return res.status(401).json({
       errors: ["Email is not registered."],
     });
   }
@@ -83,7 +84,7 @@ router.post("/login", async (req, res) => {
 
   const token = await jwt.sign(
     { email: findUser.email },
-    `${process.env.JWT_SECRET}`,
+    `${process.env.JWT_SECRET_KEY}`,
     {
       expiresIn: "1h",
     }
@@ -96,6 +97,19 @@ router.post("/login", async (req, res) => {
       firstName: findUser.firstName,
       lastName: findUser.lastName,
       email: findUser.email,
+    },
+  });
+});
+
+router.get("/me", checkAuth, async (req, res) => {
+  const user = await User.findOne({ email: req.user });
+
+  res.status(200).json({
+    user: {
+      id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
     },
   });
 });
