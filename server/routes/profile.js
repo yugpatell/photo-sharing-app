@@ -68,7 +68,7 @@ router.put(
       }
     );
 
-    const updatedUser = await User.findOne({ _id: user });
+    const updatedUser = await User.findById({ _id: user }).select("-password");
 
     res.json({ updatedUser });
   }

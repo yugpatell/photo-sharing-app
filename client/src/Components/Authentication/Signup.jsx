@@ -13,6 +13,7 @@ import {
   Text,
   useColorModeValue,
   Link,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -28,6 +29,7 @@ export default function SignupCard() {
   const [showError, setError] = useState("");
 
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleSignUp = async () => {
     await axios
@@ -41,9 +43,24 @@ export default function SignupCard() {
         (res) => {
           console.log("Registered successfully!");
           navigate("/login");
+
+          toast({
+            title: "Registered successfully!",
+            description: "Login to access the site.",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
         },
         (error) => {
           setError(error.response.data.errors[0]);
+          toast({
+            title: "Unable to create account",
+            description: "Please try again with the required fields.",
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+          });
         }
       );
   };

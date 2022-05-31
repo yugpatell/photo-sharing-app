@@ -14,6 +14,7 @@ import {
   Center,
   Box,
   InputGroup,
+  useToast,
   InputRightElement,
 } from "@chakra-ui/react";
 import { SmallCloseIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -35,6 +36,7 @@ export default function UserProfileEdit() {
   const [imageURL, setImageURL] = useState("");
   const ref = useRef();
 
+  const toast = useToast();
   const navigate = useNavigate();
   useEffect(() => {
     if (user.user) {
@@ -61,11 +63,29 @@ export default function UserProfileEdit() {
           setError(null);
           setImageURL(null);
           navigate("/editprofile");
-          window.location.reload(false);
+          setUser({
+            user: res.data.updatedUser,
+            loading: false,
+            error: null,
+          });
           ref.current.value = "";
+          toast({
+            title: "Profile updated succesfully!",
+            description: "",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
         },
         (error) => {
           setError(error.response.data.errors[0]);
+          toast({
+            title: "Unable to update profile.",
+            description: "Please try again with the required fields.",
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+          });
         }
       );
   };

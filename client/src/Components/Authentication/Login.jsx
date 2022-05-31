@@ -12,6 +12,7 @@ import {
   Button,
   Heading,
   Text,
+  useToast,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -29,7 +30,7 @@ export default function SimpleCard() {
   const [user, setUser] = useContext(UserContext);
 
   const navigate = useNavigate();
-
+  const toast = useToast();
   const handleLogin = async () => {
     await axios
       .post("http://localhost:8080/auth/login", {
@@ -45,9 +46,24 @@ export default function SimpleCard() {
           axios.defaults.headers.common[
             "Authorization"
           ] = `Bearer ${res.data.token}`;
+
+          toast({
+            title: "Login successfully",
+            description: "Welcome back!",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
         },
         (error) => {
           setError(error.response.data.errors[0]);
+          toast({
+            title: "Unable to sign in",
+            description: "Please try again with the required fields.",
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+          });
         }
       );
   };

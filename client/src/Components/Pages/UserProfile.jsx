@@ -4,14 +4,10 @@ import {
   Box,
   Center,
   Text,
-  Stack,
-  Button,
-  Link,
-  Badge,
   useColorModeValue,
 } from "@chakra-ui/react";
 
-export default function SocialProfileSimple() {
+export default function SocialProfileSimple({ profile }) {
   return (
     <Center py={6}>
       <Box
@@ -25,16 +21,16 @@ export default function SocialProfileSimple() {
       >
         <Avatar
           size={"xl"}
-          src={"..."}
+          src={profile.profilePicture}
           alt={"Avatar Alt"}
           mb={4}
           pos={"relative"}
         />
         <Heading fontSize={"2xl"} fontFamily={"body"}>
-          Lindsey James
+          {profile.firstName + " " + profile.lastName}
         </Heading>
         <Text fontWeight={600} color={"gray.500"} mb={4}>
-          @lindsey_jam3s
+          {profile.email}
         </Text>
       </Box>
     </Center>
