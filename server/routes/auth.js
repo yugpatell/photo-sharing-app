@@ -97,6 +97,7 @@ router.post("/login", async (req, res) => {
       firstName: findUser.firstName,
       lastName: findUser.lastName,
       email: findUser.email,
+      profilePicture: findUser.profilePicture,
     },
   });
 });
