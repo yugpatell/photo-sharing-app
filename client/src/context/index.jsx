@@ -26,7 +26,6 @@ const UserProvider = ({ children }) => {
     await axios
       .get("http://localhost:8080/auth/me")
       .then((res) => {
-        console.log(res);
         if (res.data && res.data.user) {
           setUser({
             user: res.data.user,
@@ -47,7 +46,6 @@ const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log("Running fetchUser");
     if (token) fetchUser();
     else {
       setUser({

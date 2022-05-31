@@ -6,11 +6,17 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 router.put(
-  "/user",
+  "/:user",
   body("firstName").isLength({ min: 3 }).withMessage("First name is invalid."),
   body("lastName").isLength({ min: 3 }).withMessage("Last name is invalid."),
+  body("email").isEmail().withMessage("Email is invalid."),
+  body("oldPassword")
+    .isLength({ min: 6 })
+    .withMessage("Old Password is invalid."),
+  body("newPassword")
+    .isLength({ min: 6 })
+    .withMessage("New Password is invalid."),
   async (req, res) => {
-    console.log(req.body);
     /* Throw errors if validation errors */
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
@@ -24,11 +30,36 @@ router.put(
       });
     }
 
-    const { user } = req.params;
-    const { firstName, lastName, email, oldPassword, newPassword } = req.body;
-    const findUser = await User.findOne({ id: user });
+    let { user } = req.params;
+    user = user.split("=")[1];
 
-    res.json({ findUser });
+    let findUser = await User.findOne({ _id: user });
+
+    const { firstName, lastName, email, oldPassword, newPassword } = req.body;
+
+    const isMatch = await bcrypt.compare(oldPassword, findUser.password);
+
+    if (!isMatch) {
+      return res.status(400).json({
+        errors: ["Old Password is incorrect."],
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
+
+    findUser = await User.findByIdAndUpdate(
+      { _id: user },
+      {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: hashedPassword,
+      }
+    );
+
+    const updatedUser = await User.findOne({ _id: user });
+
+    res.json({ updatedUser });
   }
 );
 

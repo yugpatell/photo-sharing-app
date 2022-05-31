@@ -17,14 +17,14 @@ import {
   Stack,
   Heading,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { UserContext } from "../context";
+import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
+import { UserContext } from "../../context";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Links = ["Dashboard", "Projects", "Team"];
+const Links = ["Home", "Test"];
 
-const NavLink = () => (
+const NavLink = ({ children }) => (
   <Link
     px={2}
     py={1}
@@ -33,8 +33,10 @@ const NavLink = () => (
       textDecoration: "none",
       bg: useColorModeValue("gray.200", "gray.700"),
     }}
-    href={"#"}
-  ></Link>
+    href={"/"}
+  >
+    {children}
+  </Link>
 );
 
 export default function Navigation() {
@@ -42,7 +44,7 @@ export default function Navigation() {
   const { colorMode, toggleColorMode } = useColorMode();
   const [user, setUser] = useContext(UserContext);
   const navigate = useNavigate();
-  console.log(user);
+
   const handleSignout = () => {
     localStorage.removeItem("token");
     setUser({ user: null, loading: false, error: null });
@@ -65,7 +67,7 @@ export default function Navigation() {
             <Button onClick={toggleColorMode}>
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
             </Button>
-            <Box>Home</Box>
+
             <HStack
               as={"nav"}
               spacing={4}
@@ -125,9 +127,11 @@ export default function Navigation() {
                   />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>Edit Profile</MenuItem>
+                  <MenuItem onClick={() => navigate("/editprofile")}>
+                    Edit Profile
+                  </MenuItem>
                   <MenuDivider />
-                  <MenuItem onClick={handleSignout}>Sign out</MenuItem>
+                  <MenuItem onClick={handleSignout}>Sign Out</MenuItem>
                 </MenuList>
               </Menu>
             )}
