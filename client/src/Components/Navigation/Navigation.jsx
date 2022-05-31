@@ -22,9 +22,18 @@ import { UserContext } from "../../context";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Links = ["Home", "Test"];
+const Links = [
+  {
+    name: "Home",
+    url: "/",
+  },
+  {
+    name: "Profiles",
+    url: "/profiles",
+  },
+];
 
-const NavLink = ({ children }) => (
+const NavLink = ({ children, url }) => (
   <Link
     px={2}
     py={1}
@@ -33,7 +42,7 @@ const NavLink = ({ children }) => (
       textDecoration: "none",
       bg: useColorModeValue("gray.200", "gray.700"),
     }}
-    href={"/"}
+    href={url}
   >
     {children}
   </Link>
@@ -48,7 +57,6 @@ export default function Navigation() {
   const handleSignout = () => {
     localStorage.removeItem("token");
     setUser({ user: null, loading: false, error: null });
-    localStorage.removeItem("token");
     navigate("/login");
   };
 
@@ -74,7 +82,9 @@ export default function Navigation() {
               display={{ base: "none", md: "flex" }}
             >
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink key={link.name} url={link.url}>
+                  {link.name}
+                </NavLink>
               ))}
             </HStack>
           </HStack>
@@ -119,12 +129,7 @@ export default function Navigation() {
                   cursor={"pointer"}
                   minW={0}
                 >
-                  <Avatar
-                    size={"sm"}
-                    src={
-                      user.user.profilePicture
-                    }
-                  />
+                  <Avatar size={"sm"} src={user.user.profilePicture} />
                 </MenuButton>
                 <MenuList>
                   <MenuItem onClick={() => navigate("/editprofile")}>

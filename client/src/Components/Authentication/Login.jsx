@@ -17,7 +17,8 @@ import {
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../context";
 import axios from "axios";
 
 export default function SimpleCard() {
@@ -25,8 +26,10 @@ export default function SimpleCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setError] = useState("");
+  const [user, setUser] = useContext(UserContext);
 
   const navigate = useNavigate();
+
   const handleLogin = async () => {
     await axios
       .post("http://localhost:8080/auth/login", {
@@ -38,7 +41,10 @@ export default function SimpleCard() {
           console.log("Logged in successfully!");
           localStorage.setItem("token", res.data.token);
           navigate("/");
-          window.location.reload(false);
+          setUser({ user: res.data.user, loading: false, error: null });
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${res.data.token}`;
         },
         (error) => {
           setError(error.response.data.errors[0]);
