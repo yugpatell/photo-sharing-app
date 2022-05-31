@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
+const profileRoutes = require("./routes/profile");
 const cors = require("cors");
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -17,9 +18,12 @@ app.listen(8080, () => {
   console.log("Server is running on port 8080");
 
   mongoose
-    .connect(process.env.MONGODB_URL)
+    .connect(
+      "mongodb+srv://yugpatel:yugpatel145@cluster0.ka417fw.mongodb.net/?retryWrites=true&w=majority"
+    )
     .then(() => {
       app.use("/auth", authRoutes);
+      app.use("/profile", profileRoutes);
     })
     .catch((err) => {
       console.log(err);
