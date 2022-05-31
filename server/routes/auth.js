@@ -103,13 +103,13 @@ router.post("/login", async (req, res) => {
 
 router.get("/me", checkAuth, async (req, res) => {
   const user = await User.findOne({ email: req.user });
-
   res.status(200).json({
     user: {
       id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      profilePicture: user.profilePicture,
     },
   });
 });

@@ -22,6 +22,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  profilePicture: {
+    type: String,
+    default: "https://bit.ly/sage-adebayo",
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);

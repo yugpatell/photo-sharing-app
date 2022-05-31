@@ -16,6 +16,9 @@ router.put(
   body("newPassword")
     .isLength({ min: 6 })
     .withMessage("New Password is invalid."),
+  body("profilePicture")
+    .isLength({ min: 10 })
+    .withMessage("Could not upload image."),
   async (req, res) => {
     /* Throw errors if validation errors */
     const validationErrors = validationResult(req);
@@ -35,7 +38,14 @@ router.put(
 
     let findUser = await User.findOne({ _id: user });
 
-    const { firstName, lastName, email, oldPassword, newPassword } = req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      oldPassword,
+      newPassword,
+      profilePicture,
+    } = req.body;
 
     const isMatch = await bcrypt.compare(oldPassword, findUser.password);
 
@@ -54,6 +64,7 @@ router.put(
         lastName: lastName,
         email: email,
         password: hashedPassword,
+        profilePicture: profilePicture,
       }
     );
 
@@ -62,5 +73,10 @@ router.put(
     res.json({ updatedUser });
   }
 );
+
+router.get("/users", async (req, res) => {
+  const users = await User.find({}, "-password");
+  return res.json(users);
+});
 
 module.exports = router;
