@@ -1,16 +1,30 @@
-import { Box, Heading, HStack, Text } from "@chakra-ui/react";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Comment from "./Comment";
+import { Box } from "@chakra-ui/react";
 
-const Comments = () => {
+const Comments = ({ postId }) => {
+  const [comments, setComments] = useState([]);
+
+  const fetchComments = () => {
+    axios.get(`http://localhost:8080/comments/${postId}`).then(
+      (res) => {
+        setComments(res.data);
+      },
+      (err) => {
+        console.warn(err);
+      }
+    );
+  }
+  useEffect(() => {
+    fetchComments();
+  }, []);
+
   return (
     <Box>
-      <HStack>
-        <Heading size={"sm"}>Yug</Heading>
-        <Heading size={"sm"}>3 hours ago</Heading>
-      </HStack>
-      <Heading size={"xs"} color={"blue.300"}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      </Heading>
+    {comments.map((comment) => (
+        <Comment key={comment._id} authorName={comment.authorName} body={comment.body} date={comment.date}/>
+        ))}
     </Box>
   );
 };

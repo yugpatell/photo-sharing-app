@@ -2,7 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
-const postsRoutes = require("./routes/posts");
+const postRoutes = require("./routes/posts");
+const commentRoutes = require("./routes/comment");
 const cors = require("cors");
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -25,7 +26,8 @@ app.listen(8080, () => {
     .then(() => {
       app.use("/auth", authRoutes);
       app.use("/profile", profileRoutes);
-      app.use("/posts", postsRoutes);
+      app.use("/posts", postRoutes);
+      app.use("/comments", commentRoutes);
     })
     .catch((err) => {
       console.log(err);

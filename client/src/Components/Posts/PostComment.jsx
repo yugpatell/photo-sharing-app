@@ -11,14 +11,55 @@ import {
   Input,
   Button,
   Textarea,
+  useToast,
+  Center,
+  Heading
 } from "@chakra-ui/react";
 
 import { ChatIcon } from "@chakra-ui/icons";
-import { useRef } from "react";
 import Comments from "./Comments";
+import { useState, useEffect, useContext, useRef } from "react";
+import { UserContext } from "../../context";
+import axios from "axios";
 
-export default function InitialFocus({ isOpen, onOpen, onClose }) {
+export default function InitialFocus({ postId, isOpen, onOpen, onClose }) {
   const initialRef = useRef();
+  const [user, setUser] = useContext(UserContext);
+  const [body, setBody] = useState("");
+  
+  const toast = useToast();
+
+
+  
+  const handleSubmitComment = () => {
+    axios.post("http://localhost:8080/comments/createComment", {
+      postId: postId,
+      author: user.user.id,
+      authorName: user.user.firstName + " " + user.user.lastName,
+      body: body,
+    })
+    .then(
+      (res) => {
+        setBody("");
+        toast({
+          title: "Comment created successfully!",
+          description: "",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+      },
+      (error) => {
+        toast({
+          title: "Unable to create comment",
+          description: error.response.data.errors[0],
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      }
+    );
+  }
 
   return (
     <>
@@ -32,18 +73,21 @@ export default function InitialFocus({ isOpen, onOpen, onClose }) {
         <ModalOverlay bg="" />
         <ModalContent>
           <ModalHeader>
-            <Comments />
+          <Center>
+          <Heading fontSize={"xx-large"} mb={5}> Comments </Heading>
+          </Center>
+            <Comments postId={postId} />
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>Comment</FormLabel>
-              <Textarea placeholder="..." />
+              <FormLabel>New Comment</FormLabel>
+              <Textarea placeholder="Enter comment" value={body} onChange={(event) => setBody(event.target.value)} maxLength={75}/>
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} leftIcon={<ChatIcon />}>
+            <Button colorScheme="blue" mr={3} leftIcon={<ChatIcon />} onClick={handleSubmitComment}>
               Post Comment
             </Button>
             <Button onClick={onClose}>Cancel</Button>

@@ -13,6 +13,7 @@ import PostComment from "../Posts/PostComment";
 import dateFormat from "dateformat";
 
 export default function BlogPostWithImage({
+  postId,
   author,
   authorName,
   authorPicture,
@@ -22,7 +23,6 @@ export default function BlogPostWithImage({
   postPicture,
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <>
       <Center py={6}>
@@ -95,7 +95,7 @@ export default function BlogPostWithImage({
         </Box>
       </Center>
 
-      <PostComment isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+      <PostComment postId={postId} isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
     </>
   );
 }

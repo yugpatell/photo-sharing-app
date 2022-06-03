@@ -17,9 +17,10 @@ const Posts = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [posts, setPosts] = React.useState([]);
 
-  const fetchPosts = async () => {
-    await axios.get("http://localhost:8080/posts/").then((res) => {
+  const fetchPosts = () => {
+    axios.get("http://localhost:8080/posts/").then((res) => {
       setPosts(res.data);
+      console.log(res.data);
     });
   };
 
@@ -54,6 +55,7 @@ const Posts = () => {
             {posts.map((post) => (
               <Post
                 key={post._id}
+                postId={post._id}
                 author={post.author}
                 authorName={post.authorName}
                 authorPicture={post.authorProfilePicture}
@@ -67,12 +69,7 @@ const Posts = () => {
         </VStack>
       </Center>
 
-      <NewPost
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
-        fetchPosts={fetchPosts}
-      />
+      <NewPost isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
     </>
   );
 };

@@ -9,10 +9,12 @@ router.post(
   body("author")
     .isLength({ min: 10 })
     .withMessage("Author ID must be at least 10 characters long"),
-  body("title").isLength({ min: 7 }).withMessage("Title is invalid."),
+  body("title")
+    .isLength({ min: 8 })
+    .withMessage("Title must be atleast 8 characters long."),
   body("description")
     .isLength({ min: 10 })
-    .withMessage("Description is invalid."),
+    .withMessage("Description must be at least 10 characters long."),
   body("postPicture")
     .isLength({ min: 1 })
     .withMessage("No picture was uploaded."),

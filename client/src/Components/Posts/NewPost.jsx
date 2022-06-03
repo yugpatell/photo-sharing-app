@@ -25,7 +25,7 @@ import { useState, useContext, useRef } from "react";
 import { UserContext } from "../../context";
 import axios from "axios";
 
-const NewPost = ({ isOpen, onOpen, onClose }) => {
+const NewPost = ({ isOpen, onOpen, onClose, fetchPosts }) => {
   const initialRef = useRef();
   const [user, setUser] = useContext(UserContext);
   const [title, setTitle] = useState("");
@@ -44,7 +44,6 @@ const NewPost = ({ isOpen, onOpen, onClose }) => {
         postPicture: imageURL,
       })
       .then((res) => {
-        console.log(res);
         setImageURL("");
         setTitle("");
         setDescription("");
