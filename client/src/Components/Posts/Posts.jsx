@@ -8,6 +8,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Post from "../Posts/Post";
+import NewPost from "./NewPost";
 import { EditIcon } from "@chakra-ui/icons";
 const Posts = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -18,16 +19,17 @@ const Posts = () => {
         <VStack>
           <Button
             variant={"solid"}
-            bg={"red.400"}
+            bg={"teal.400"}
             color={"white"}
             size={"lg"}
             mr={4}
             _hover={{
-              bg: "red.300",
+              bg: "teal.300",
             }}
             leftIcon={<EditIcon />}
+            onClick={onOpen}
           >
-            Create a new post
+             New Post 
           </Button>
           <Heading as="h1" size="xl"></Heading>
           <SimpleGrid columns={[1, 1, 2, 3]} spacing={10}>
@@ -38,6 +40,8 @@ const Posts = () => {
           </SimpleGrid>
         </VStack>
       </Center>
+
+      <NewPost isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
     </>
   );
 };
