@@ -11,7 +11,9 @@ function App() {
     <Router>
       <Navigation />
       <Routes>
-        <Route path="/" exact element={<Home />} />
+        <Route path="/" exact element={<ProtectedRoute />}>
+          <Route path="/" exact element={<Home />} />
+        </Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/editprofile" element={<ProtectedRoute />}>
