@@ -122,7 +122,11 @@ export default function UserProfileEdit() {
         p={6}
         my={12}
       >
-        <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
+        <Heading
+          lineHeight={1.1}
+          fontSize={{ base: "2xl", sm: "3xl" }}
+          color={useColorModeValue("blue.400", "red.400")}
+        >
           User Profile Edit
         </Heading>
         <FormControl id="userName">

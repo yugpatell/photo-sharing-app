@@ -27,6 +27,7 @@ export default function SimpleCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setError] = useState("");
+  // eslint-disable-next-line
   const [user, setUser] = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -49,7 +50,6 @@ export default function SimpleCard() {
 
           toast({
             title: "Login successfully",
-            description: "Welcome back!",
             status: "success",
             duration: 2000,
             isClosable: true,

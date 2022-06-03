@@ -33,22 +33,25 @@ const Links = [
   },
 ];
 
-const NavLink = ({ children, url }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    href={url}
-  >
-    {children}
-  </Link>
-);
-
 export default function Navigation() {
+  const NavLink = ({ children, url }) => (
+    <Link
+      px={2}
+      py={1}
+      rounded={"md"}
+      _hover={{
+        textDecoration: "none",
+        bg: useColorModeValue("gray.200", "gray.700"),
+      }}
+      onClick={() => {
+        navigate(url);
+      }}
+      // href={url}
+    >
+      {children}
+    </Link>
+  );
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const [user, setUser] = useContext(UserContext);
