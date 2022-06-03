@@ -27,14 +27,14 @@ import axios from "axios";
 
 const NewPost = ({ isOpen, onOpen, onClose, fetchPosts }) => {
   const initialRef = useRef();
-  const [user, setUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageURL, setImageURL] = useState("");
 
   const toast = useToast();
 
-  const handleCreatePost = async ({ fetchPosts }) => {
+  const handleCreatePost = async () => {
     await axios
       .post("http://localhost:8080/posts/createPost", {
         author: user.user.id,
@@ -55,8 +55,10 @@ const NewPost = ({ isOpen, onOpen, onClose, fetchPosts }) => {
           duration: 2000,
           isClosable: true,
         });
+        fetchPosts();
       })
       .catch((err) => {
+        console.log(err);
         toast({
           title: "Unable to create new post.",
           description: err.response.data.errors[0],

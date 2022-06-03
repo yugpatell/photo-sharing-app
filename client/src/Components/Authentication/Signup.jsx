@@ -93,7 +93,7 @@ export default function SignupCard() {
                     type="text"
                     value={firstName}
                     onChange={(event) => {
-                      setFirstName(event.target.value);
+                      setFirstName(event.target.value.replace(/[^a-zA-Z]/g, ""));
                     }}
                   />
                 </FormControl>
@@ -105,7 +105,7 @@ export default function SignupCard() {
                     type="text"
                     value={lastName}
                     onChange={(event) => {
-                      setLastName(event.target.value);
+                      setLastName(event.target.value.replace(/[^a-zA-Z]/g, ""));
                     }}
                   />
                 </FormControl>
@@ -117,7 +117,7 @@ export default function SignupCard() {
                 type="email"
                 value={email}
                 onChange={(event) => {
-                  setEmail(event.target.value);
+                  setEmail(event.target.value.replace(/[^a-zA-Z0-9@.]/g, ""));
                 }}
               />
             </FormControl>

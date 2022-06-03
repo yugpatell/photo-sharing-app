@@ -17,10 +17,10 @@ const Posts = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [posts, setPosts] = React.useState([]);
 
+
   const fetchPosts = () => {
     axios.get("http://localhost:8080/posts/").then((res) => {
       setPosts(res.data);
-      console.log(res.data);
     });
   };
 
@@ -69,7 +69,7 @@ const Posts = () => {
         </VStack>
       </Center>
 
-      <NewPost isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+      <NewPost isOpen={isOpen} onOpen={onOpen} onClose={onClose} fetchPosts={fetchPosts}/>
     </>
   );
 };

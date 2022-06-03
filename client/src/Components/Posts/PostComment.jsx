@@ -8,7 +8,6 @@ import {
   ModalCloseButton,
   FormControl,
   FormLabel,
-  Input,
   Button,
   Textarea,
   useToast,
@@ -24,12 +23,26 @@ import axios from "axios";
 
 export default function InitialFocus({ postId, isOpen, onOpen, onClose }) {
   const initialRef = useRef();
-  const [user, setUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
   const [body, setBody] = useState("");
-  
+  const [comments, setComments] = useState([]);
+
   const toast = useToast();
 
+  const fetchComments = () => {
+    axios.get(`http://localhost:8080/comments/${postId}`).then(
+      (res) => {
+        setComments(res.data);
+      },
+      (err) => {
+        console.warn(err);
+      }
+    );
+  }
 
+  useEffect(() => {
+    fetchComments();
+  }, []);
   
   const handleSubmitComment = () => {
     axios.post("http://localhost:8080/comments/createComment", {
@@ -59,6 +72,7 @@ export default function InitialFocus({ postId, isOpen, onOpen, onClose }) {
         });
       }
     );
+    fetchComments();
   }
 
   return (
@@ -76,7 +90,7 @@ export default function InitialFocus({ postId, isOpen, onOpen, onClose }) {
           <Center>
           <Heading fontSize={"xx-large"} mb={5}> Comments </Heading>
           </Center>
-            <Comments postId={postId} />
+            <Comments setComments={setComments} comments={comments} postId={postId} />
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>

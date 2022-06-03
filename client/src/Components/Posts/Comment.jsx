@@ -1,11 +1,8 @@
 import React from "react";
 import {
-  Box,
-  Heading,
   HStack,
   Text,
   Stack,
-  Avatar,
   useColorModeValue,
   Divider,
 } from "@chakra-ui/react";
@@ -23,15 +20,22 @@ const Comment = ({ authorName, body, date }) => {
           >
             {authorName}
           </Text>
-          <Text color={useColorModeValue("gray.700", "white.300")} fontSize={"xs"} px={2}>
+          <Text
+            color={useColorModeValue("gray.700", "white.300")}
+            fontSize={"xs"}
+            px={2}
+          >
             {dateFormat(date, "mmmm dS, yyyy, h:MM TT")}
           </Text>
         </HStack>
-        <Text color={useColorModeValue("gray.700", "white.300")} fontSize={"sm"}>
-            {body}
-          </Text>
-        </Stack>
-        <Divider/>
+        <Text
+          color={useColorModeValue("gray.700", "white.300")}
+          fontSize={"sm"}
+        >
+          {body}
+        </Text>
+      </Stack>
+      <Divider />
     </>
   );
 };

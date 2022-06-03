@@ -92,7 +92,7 @@ export default function SimpleCard() {
                 type="email"
                 value={email}
                 onChange={(event) => {
-                  setEmail(event.target.value);
+                  setEmail(event.target.value.replace(/[^a-zA-Z0-9@.]/g, ""));
                 }}
               />
             </FormControl>
