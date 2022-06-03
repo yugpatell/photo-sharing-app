@@ -62,7 +62,9 @@ export default function UserProfileEdit() {
           console.log("Successfully updated profile!");
           setError(null);
           setImageURL(null);
-          navigate("/editprofile");
+          setOldPassword("");
+          setNewPassword("");
+          navigate("/");
           setUser({
             user: res.data.updatedUser,
             loading: false,

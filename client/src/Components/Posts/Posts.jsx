@@ -10,8 +10,22 @@ import {
 import Post from "../Posts/Post";
 import NewPost from "./NewPost";
 import { EditIcon } from "@chakra-ui/icons";
+import { useEffect } from "react";
+import axios from "axios";
+
 const Posts = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [posts, setPosts] = React.useState([]);
+
+  const fetchPosts = async () => {
+    await axios.get("http://localhost:8080/posts/").then((res) => {
+      setPosts(res.data);
+    });
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   return (
     <>
@@ -29,19 +43,36 @@ const Posts = () => {
             leftIcon={<EditIcon />}
             onClick={onOpen}
           >
-             New Post 
+            New Post
           </Button>
           <Heading as="h1" size="xl"></Heading>
-          <SimpleGrid columns={[1, 1, 2, 3]} spacing={10}>
+          <SimpleGrid columns={[1, 1, 1, 2, 2, 3]} spacing={10}>
+            {/* <Post />
             <Post />
             <Post />
-            <Post />
-            <Post />
+            <Post /> */}
+            {posts.map((post) => (
+              <Post
+                key={post._id}
+                author={post.author}
+                authorName={post.authorName}
+                authorPicture={post.authorProfilePicture}
+                title={post.title}
+                description={post.description}
+                date={post.date}
+                postPicture={post.postPicture}
+              />
+            ))}
           </SimpleGrid>
         </VStack>
       </Center>
 
-      <NewPost isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
+      <NewPost
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        fetchPosts={fetchPosts}
+      />
     </>
   );
 };

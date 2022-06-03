@@ -15,18 +15,74 @@ import {
   Stack,
   Box,
   VStack,
-  IconButton,
-  Flex,
   useColorModeValue,
   Image,
   Heading,
   Center,
+  useToast,
 } from "@chakra-ui/react";
-import { useRef } from "react";
-import { SmallCloseIcon } from "@chakra-ui/icons";
+import { useState, useContext, useRef } from "react";
+import { UserContext } from "../../context";
+import axios from "axios";
 
 const NewPost = ({ isOpen, onOpen, onClose }) => {
   const initialRef = useRef();
+  const [user, setUser] = useContext(UserContext);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageURL, setImageURL] = useState("");
+
+  const toast = useToast();
+
+  const handleCreatePost = async ({ fetchPosts }) => {
+    await axios
+      .post("http://localhost:8080/posts/createPost", {
+        author: user.user.id,
+        name: user.user.firstName + " " + user.user.lastName,
+        title: title,
+        description: description,
+        postPicture: imageURL,
+      })
+      .then((res) => {
+        console.log(res);
+        setImageURL("");
+        setTitle("");
+        setDescription("");
+        onClose();
+        toast({
+          title: "Successfully created a new post",
+          description: "",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+      })
+      .catch((err) => {
+        toast({
+          title: "Unable to create new post.",
+          description: err.response.data.errors[0],
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      });
+  };
+
+  const uploadImage = async (file) => {
+    let axiosInstance = axios.create();
+    delete axiosInstance.defaults.headers.common["Authorization"];
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "my-uploads");
+
+    await axiosInstance
+      .post(`https://api.cloudinary.com/v1_1/teamcyd/image/upload`, formData)
+      .then((res) => res.data.secure_url)
+      .then((url) => setImageURL(url))
+      .catch((err) => console.warn(err));
+  };
+
   return (
     <>
       <Modal
@@ -40,7 +96,6 @@ const NewPost = ({ isOpen, onOpen, onClose }) => {
         <ModalContent>
           <ModalHeader>
             <Heading>
-              {" "}
               <Box
                 h={"210px"}
                 bg={"gray.100"}
@@ -54,13 +109,20 @@ const NewPost = ({ isOpen, onOpen, onClose }) => {
                   objectFit="cover"
                   w="100%"
                   h="100%"
-                  src="k"
+                  src={imageURL}
                 />
               </Box>
               <Center>
                 <VStack>
                   <Heading>Post Image</Heading>
-                  <Button w="full">Change Picture</Button>
+                  <Input
+                    type="file"
+                    label="Upload"
+                    py={1}
+                    onChange={(event) => {
+                      uploadImage(event.target.files[0]);
+                    }}
+                  />
                 </VStack>
               </Center>
             </Heading>
@@ -82,6 +144,11 @@ const NewPost = ({ isOpen, onOpen, onClose }) => {
                   _placeholder={{ color: "gray.500" }}
                   type="text"
                   isDisabled
+                  value={
+                    user.user
+                      ? user.user.firstName + " " + user.user.lastName
+                      : ""
+                  }
                 />
               </FormControl>
               <FormControl id="title" isRequired>
@@ -90,6 +157,8 @@ const NewPost = ({ isOpen, onOpen, onClose }) => {
                   placeholder="Title"
                   _placeholder={{ color: "gray.500" }}
                   type="text"
+                  onChange={(event) => setTitle(event.target.value)}
+                  maxLength={30}
                 />
               </FormControl>
               <FormControl id="description" isRequired>
@@ -97,17 +166,33 @@ const NewPost = ({ isOpen, onOpen, onClose }) => {
                 <Textarea
                   placeholder="Description"
                   _placeholder={{ color: "gray.500" }}
-                  type="password"
+                  type="text"
+                  onChange={(event) => setDescription(event.target.value)}
+                  maxLength={90}
                 />
               </FormControl>
             </Stack>
           </ModalBody>
-
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Post Comment
+            <Button
+              bg={useColorModeValue("blue.400", "red.400")}
+              mr={3}
+              _hover={{
+                bg: useColorModeValue("blue.300", "red.300"),
+              }}
+              onClick={handleCreatePost}
+            >
+              Create Post
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button
+              bg={"teal.500"}
+              _hover={{
+                bg: "teal.400",
+              }}
+              onClick={onClose}
+            >
+              Cancel
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
