@@ -17,7 +17,6 @@ const Posts = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [posts, setPosts] = React.useState([]);
 
-
   const fetchPosts = () => {
     axios.get("http://localhost:8080/posts/").then((res) => {
       setPosts(res.data);
@@ -48,10 +47,6 @@ const Posts = () => {
           </Button>
           <Heading as="h1" size="xl"></Heading>
           <SimpleGrid columns={[1, 1, 1, 2, 2, 3]} spacing={10}>
-            {/* <Post />
-            <Post />
-            <Post />
-            <Post /> */}
             {posts.map((post) => (
               <Post
                 key={post._id}
@@ -63,13 +58,19 @@ const Posts = () => {
                 description={post.description}
                 date={post.date}
                 postPicture={post.postPicture}
+                fetchPosts={fetchPosts}
               />
             ))}
           </SimpleGrid>
         </VStack>
       </Center>
 
-      <NewPost isOpen={isOpen} onOpen={onOpen} onClose={onClose} fetchPosts={fetchPosts}/>
+      <NewPost
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        fetchPosts={fetchPosts}
+      />
     </>
   );
 };

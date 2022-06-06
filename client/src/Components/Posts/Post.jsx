@@ -8,9 +8,17 @@ import {
   Image,
   useColorModeValue,
   useDisclosure,
+  IconButton,
+  useToast,
+  HStack,
 } from "@chakra-ui/react";
+import React, { useContext } from "react";
+import { DeleteIcon, ChatIcon } from "@chakra-ui/icons";
 import PostComment from "../Posts/PostComment";
 import dateFormat from "dateformat";
+import { UserContext } from "../../context";
+import axios from "axios";
+import ConfirmDelete from "./ConfirmDelete";
 
 export default function BlogPostWithImage({
   postId,
@@ -21,8 +29,48 @@ export default function BlogPostWithImage({
   description,
   date,
   postPicture,
+  fetchPosts,
 }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [user] = useContext(UserContext);
+  const {
+    isOpen: isCommentOpen,
+    onOpen: onCommentOpen,
+    onClose: onCommentClose,
+  } = useDisclosure();
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen,
+    onClose: onDeleteClose,
+  } = useDisclosure();
+  const toast = useToast();
+
+  const handleDelete = () => {
+    console.log(`${postId}`);
+    axios
+      .delete(`http://localhost:8080/posts/${postId}`)
+      .then((res) => {
+        onDeleteClose();
+        toast({
+          title: "Successfully deleted the post",
+          description: "",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+        fetchPosts();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast({
+          title: "Unable to delete the post",
+          description: "",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      });
+  };
+
   return (
     <>
       <Center py={6}>
@@ -37,7 +85,6 @@ export default function BlogPostWithImage({
           rounded={"md"}
           p={6}
           overflowY={"hidden"}
-          onClick={onOpen}
           cursor={"pointer"}
           _hover={{
             transform: "scale(1.01)",
@@ -91,11 +138,42 @@ export default function BlogPostWithImage({
                 {dateFormat(date, "mmmm dS, yyyy, h:MM TT")}
               </Text>
             </Stack>
+            <HStack align={"right"}>
+              <IconButton
+                onClick={() => {
+                  onCommentOpen();
+                }}
+                aria-label="delete"
+                icon={<ChatIcon />}
+                align={"right"}
+              />
+              {author === user.user.id && (
+                <IconButton
+                  onClick={() => {
+                    onDeleteOpen();
+                  }}
+                  aria-label="delete"
+                  icon={<DeleteIcon />}
+                  align={"right"}
+                />
+              )}
+            </HStack>
           </Stack>
         </Box>
       </Center>
 
-      <PostComment postId={postId} isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+      <PostComment
+        postId={postId}
+        isOpen={isCommentOpen}
+        onOpen={onCommentOpen}
+        onClose={onCommentClose}
+      />
+
+      <ConfirmDelete
+        isDeleteOpen={isDeleteOpen}
+        onDeleteClose={onDeleteClose}
+        handleDelete={handleDelete}
+      />
     </>
   );
 }

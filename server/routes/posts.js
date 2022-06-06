@@ -52,4 +52,16 @@ router.get("/", async (req, res) => {
   res.status(200).json(posts);
 });
 
+router.delete("/:postId", async (req, res) => {
+  const postId = req.params.postId;
+  console.log(postId);
+  const post = await Post.findById(postId);
+  if (!post) {
+    return res.status(404).json({ msg: "Post not found." });
+  } else {
+    await Post.findByIdAndDelete(postId); // Delete post
+    res.status(200).json({ msg: "Post deleted." });
+  }
+});
+
 module.exports = router;
