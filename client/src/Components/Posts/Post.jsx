@@ -45,7 +45,6 @@ export default function BlogPostWithImage({
   const toast = useToast();
 
   const handleDelete = () => {
-    console.log(`${postId}`);
     axios
       .delete(`http://localhost:8080/posts/${postId}`)
       .then((res) => {

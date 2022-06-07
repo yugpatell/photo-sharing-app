@@ -7,8 +7,8 @@ const User = require("../models/user");
 router.post(
   "/createPost",
   body("author")
-    .isLength({ min: 10 })
-    .withMessage("Author ID must be at least 10 characters long"),
+    .isLength({ min: 3 })
+    .withMessage("Author ID must be at least 3 characters long"),
   body("title")
     .isLength({ min: 8 })
     .withMessage("Title must be atleast 8 characters long."),
@@ -55,7 +55,6 @@ router.get("/", async (req, res) => {
 
 router.delete("/:postId", async (req, res) => {
   const postId = req.params.postId;
-  console.log(postId);
   const post = await Post.findById(postId);
   if (!post) {
     return res.status(404).json({ msg: "Post not found." });
