@@ -19,7 +19,11 @@ const Posts = () => {
 
   const fetchPosts = () => {
     axios.get("http://localhost:8080/posts/").then((res) => {
-      setPosts(res.data);
+      let postsData = res.data;
+      postsData.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+      setPosts(postsData);
     });
   };
 

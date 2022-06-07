@@ -32,7 +32,12 @@ export default function InitialFocus({ postId, isOpen, onOpen, onClose }) {
   const fetchComments = () => {
     axios.get(`http://localhost:8080/comments/${postId}`).then(
       (res) => {
-        setComments(res.data);
+        let comments = res.data;
+        console.log(comments);
+        comments.sort((a, b) => {
+          return new Date(b.date) - new Date(a.date);
+        });
+        setComments(comments);
       },
       (err) => {
         console.warn(err);
