@@ -40,6 +40,7 @@ router.post(
       authorProfilePicture: findUser.profilePicture,
       title: title,
       description: description,
+      date: Date.now(),
       postPicture: postPicture,
     });
 

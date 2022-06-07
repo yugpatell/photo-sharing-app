@@ -35,6 +35,7 @@ router.post(
       author: author,
       authorName: authorName,
       body: body,
+      date: Date.now(),
     });
 
     res.status(200).json({ newComment });

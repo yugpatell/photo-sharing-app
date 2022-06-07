@@ -30,7 +30,7 @@ const postSchema = new Schema({
   },
   date: {
     type: Date,
-    default: Date.now(),
+    required: true,
   },
   postPicture: {
     type: String,
