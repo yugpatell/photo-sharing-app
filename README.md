@@ -1,5 +1,3 @@
-# CS110 Final Project
-
 ## Table of Contents
 - [Overview](#overview)
 - [How To Run](#how-to-run)
@@ -8,28 +6,11 @@
 
 Try it out at:
 ## https://teamcyd.herokuapp.com/
+
 ## Team
 <a href="https://github.com/yugpatell" target="_blank">Yug Patel</a>
 <a href="https://github.com/P-Dhruv20" target="_blank">Dhruv Parmar</a>
 <a href="https://github.com/36tofu" target="_blank">Christopher Chen</a>
-
-## Overview
-CYD is a simple but refined media platform where users connect with each other through photo sharing. 
-It is hosted by Heroku.
-
-Security is the most important component of CYD. We want to ensure that user content remains secure 
-as it is viewed and commented on by the rest of the internet. To maintain integrity of our app, 
-we require users to create profiles in order to access shared content. User login passwords are secured using 
-bycrpt hashing. 
-
-The main features of our application are posting pictures and commenting on other user's posts. However, with a high volume of users, storing and displaying images can become an issue.
-Our solution to handling images efficiently is uploading to a Cloudinary API endpoint, which returns us a URL. This is faster and saves space over storing it directly on our server.
-
-We used Chakra UI to implement most of our styling. A cool feature is that it has baked in dark mode available. You can try this out by clicking the moon / sun on the top left corner!
-
-
-
-## Diagrams
 
 Home Page
 ![](https://user-images.githubusercontent.com/68174967/172293844-39417f27-f41c-453f-89bd-e25a1716817a.JPG)
