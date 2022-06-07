@@ -1,7 +1,6 @@
 ## Table of Contents
-- [Overview](#overview)
-- [How To Run](#how-to-run)
-- [Diagrams](#diagrams)
+- [Overview](#team)
+- [How To Run](#how-to-run-locally)
 - [Dependencies](#dependencies)
 
 Try it out at:
