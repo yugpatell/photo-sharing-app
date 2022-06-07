@@ -6,6 +6,7 @@
 - [Diagrams](#diagrams)
 - [Dependencies](#dependencies)
 
+Try it out at:
 ## https://teamcyd.herokuapp.com/
 ## Team
 <a href="https://github.com/yugpatell" target="_blank">Yug Patel</a>
@@ -14,7 +15,7 @@
 
 ## Overview
 CYD is a simple but refined media platform where users connect with each other through photo sharing. 
-It is hosted by Heroku and is available for usage <a href="https://teamcyd.herokuapp.com/login" target="blank">here</a>
+It is hosted by Heroku.
 
 Security is the most important component of CYD. We want to ensure that user content remains secure 
 as it is viewed and commented on by the rest of the internet. To maintain integrity of our app, 
@@ -71,22 +72,26 @@ in both folders, and our application should be viewable at [http://localhost:300
 
 ## Dependencies
 Server 
-    bcryptjs
-    cors
-    dotenv
-    express
-    express-validator,
-    jsonwebtoken
-    mongoose
+<ul>
+    <li>bcryptjs</li>
+    <li>cors</li>
+    <li>dotenv</li>
+    <li>express</li>
+    <li>express-validator</li>
+    <li>jsonwebtoken</li>
+    <li>mongoose</li>
+</ul>
 Client
-    chakra-ui
-    emotion
-    axios
-    dateformat
-    framer-motion
-    react
-    react-dom
-    react-router-dom
-    react-scripts
-    web-vitals
+<ul>
+    <li>chakra-ui</li>
+    <li>emotion</li>
+    <li>axios</li>
+    <li>dateformat</li>
+    <li>framer-motion</li>
+    <li>react</li>
+    <li>react-dom</li>
+    <li>react-router-dom</li>
+    <li>react-scripts</li>
+    <li>web-vitals</li>
+</ul>
 
