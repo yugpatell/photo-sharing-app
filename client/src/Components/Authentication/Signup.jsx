@@ -33,7 +33,7 @@ export default function SignupCard() {
 
   const handleSignUp = async () => {
     await axios
-      .post("http://localhost:8080/auth/signup", {
+      .post("https://teamcyd.herokuapp.com/auth/signup", {
         firstName: firstName,
         lastName: lastName,
         email: email,

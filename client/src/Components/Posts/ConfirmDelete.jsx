@@ -19,7 +19,7 @@ const ConfirmDelete = ({ isDeleteOpen, onDeleteClose, handleDelete }) => {
           <ModalHeader>Delete Post</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text>{"Are your sure you want to delete the post?"}</Text>
+            <Text>{"Are you sure you want to delete the post?"}</Text>
           </ModalBody>
           <ModalFooter>
             <Button color={"red.200"} onClick={() => handleDelete()} mr={3}>

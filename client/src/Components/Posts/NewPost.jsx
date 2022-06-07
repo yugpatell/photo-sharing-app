@@ -36,7 +36,7 @@ const NewPost = ({ isOpen, onOpen, onClose, fetchPosts }) => {
 
   const handleCreatePost = async () => {
     await axios
-      .post("http://localhost:8080/posts/createPost", {
+      .post("https://teamcyd.herokuapp.com/posts/createPost", {
         author: user.user.id,
         name: user.user.firstName + " " + user.user.lastName,
         title: title,

@@ -35,7 +35,7 @@ const Comment = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:8080/comments/${commentId}`)
+      .delete(`https://teamcyd.herokuapp.com/comments/${commentId}`)
       .then((res) => {
         onClose();
         toast({
