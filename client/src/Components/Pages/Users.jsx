@@ -6,7 +6,7 @@ import { SimpleGrid, Center, Heading, VStack } from "@chakra-ui/react";
 export default function Profiles() {
   const [profiles, setProfiles] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8080/profile/users").then(
+    axios.get("https://teamcyd.herokuapp.com/profile/users").then(
       (res) => {
         setProfiles(res.data);
       },

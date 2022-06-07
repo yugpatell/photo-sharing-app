@@ -46,7 +46,7 @@ export default function BlogPostWithImage({
 
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:8080/posts/${postId}`)
+      .delete(`https://teamcyd.herokuapp.com/posts/${postId}`)
       .then((res) => {
         onDeleteClose();
         toast({

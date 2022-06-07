@@ -18,7 +18,7 @@ const Posts = () => {
   const [posts, setPosts] = React.useState([]);
 
   const fetchPosts = () => {
-    axios.get("http://localhost:8080/posts/").then((res) => {
+    axios.get("https://teamcyd.herokuapp.com/posts/").then((res) => {
       let postsData = res.data;
       postsData.sort((a, b) => {
         return new Date(b.date) - new Date(a.date);

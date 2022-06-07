@@ -30,7 +30,7 @@ export default function InitialFocus({ postId, isOpen, onOpen, onClose }) {
   const toast = useToast();
 
   const fetchComments = () => {
-    axios.get(`http://localhost:8080/comments/${postId}`).then(
+    axios.get(`https://teamcyd.herokuapp.com/comments/${postId}`).then(
       (res) => {
         let comments = res.data;
         comments.sort((a, b) => {
@@ -50,7 +50,7 @@ export default function InitialFocus({ postId, isOpen, onOpen, onClose }) {
 
   const handleSubmitComment = () => {
     axios
-      .post("http://localhost:8080/comments/createComment", {
+      .post("https://teamcyd.herokuapp.com/comments/createComment", {
         postId: postId,
         author: user.user.id,
         authorName: user.user.firstName + " " + user.user.lastName,

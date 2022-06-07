@@ -34,7 +34,7 @@ export default function SimpleCard() {
   const toast = useToast();
   const handleLogin = async () => {
     await axios
-      .post("http://localhost:8080/auth/login", {
+      .post("https://teamcyd.herokuapp.com/auth/login", {
         email: email,
         password: password,
       })

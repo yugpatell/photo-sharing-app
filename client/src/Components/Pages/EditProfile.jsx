@@ -49,7 +49,7 @@ export default function UserProfileEdit() {
 
   const handleProfileChange = () => {
     axios
-      .put(`http://localhost:8080/profile/user=${user.user.id}`, {
+      .put(`https://teamcyd.herokuapp.com/profile/user=${user.user.id}`, {
         firstName: firstName,
         lastName: lastName,
         email: email,

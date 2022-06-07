@@ -24,7 +24,7 @@ const UserProvider = ({ children }) => {
 
   const fetchUser = async () => {
     await axios
-      .get("http://localhost:8080/auth/me")
+      .get("https://teamcyd.herokuapp.com/auth/me")
       .then((res) => {
         if (res.data && res.data.user) {
           setUser({
