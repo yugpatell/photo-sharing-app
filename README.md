@@ -25,25 +25,25 @@ bycrpt hashing.
 ## Diagrams
 
 Home Page
-!(https://user-images.githubusercontent.com/68174967/172293844-39417f27-f41c-453f-89bd-e25a1716817a.JPG)
+![](https://user-images.githubusercontent.com/68174967/172293844-39417f27-f41c-453f-89bd-e25a1716817a.JPG)
 
 Creating a new post
-!(https://user-images.githubusercontent.com/68174967/172293820-473b2b89-54cb-4ad0-b4bf-3777c4c4b9aa.JPG)
+![](https://user-images.githubusercontent.com/68174967/172293820-473b2b89-54cb-4ad0-b4bf-3777c4c4b9aa.JPG)
 
 Adding a Comment
-!(https://user-images.githubusercontent.com/68174967/172294175-a485c445-fabc-457d-8440-c25e43c68846.JPG)
+![](https://user-images.githubusercontent.com/68174967/172294175-a485c445-fabc-457d-8440-c25e43c68846.JPG)
 
 Viewing all user profiles
-!(https://user-images.githubusercontent.com/68174967/172293872-368b40c8-4e5c-4bbf-8fde-7b0768a24832.JPG)
+![](https://user-images.githubusercontent.com/68174967/172293872-368b40c8-4e5c-4bbf-8fde-7b0768a24832.JPG)
 
 Editing existing user profile
-!(https://user-images.githubusercontent.com/68174967/172293829-9b62cf9a-16d0-49df-b028-51c332e60883.JPG)
+![](https://user-images.githubusercontent.com/68174967/172293829-9b62cf9a-16d0-49df-b028-51c332e60883.JPG)
 
 Sign in page
-!(https://user-images.githubusercontent.com/68174967/172293858-df56c215-f9dd-4940-89cc-a4e39d312cef.JPG)
+![](https://user-images.githubusercontent.com/68174967/172293858-df56c215-f9dd-4940-89cc-a4e39d312cef.JPG)
 
 User registration 
-!(https://user-images.githubusercontent.com/68174967/172293868-819b2cde-9b62-409f-ab66-717a084707c4.JPG)
+![](https://user-images.githubusercontent.com/68174967/172293868-819b2cde-9b62-409f-ab66-717a084707c4.JPG)
 
 ## How To Run
 To run our application, navigate to the `server` and `client` folders in separate terminals.
