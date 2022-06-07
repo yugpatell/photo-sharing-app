@@ -1,68 +1,66 @@
-# CS178A-B-Template
+# CS110 Final Project
 
 ## Table of Contents
 - [Overview](#overview)
-- [Usage](#usage)
 - [How To Run](#how-to-run)
 - [Diagrams](#diagrams)
 - [Dependencies](#dependencies)
 
-## Overview
-<Include project description?
 
 ## Team
-<a href="https://github.com/msalloum" target="_blank"><img src="https://avatars3.githubusercontent.com/u/1790819?s=400&v=4" align="left" height="30px">Mariam Salloum </a>
+<a href="https://github.com/yugpatell" target="_blank">Yug Patel</a>
+<a href="https://github.com/P-Dhruv20" target="_blank">Dhruv Parmar</a>
+<a href="https://github.com/36tofu" target="_blank">Christopher Chen</a>
 
-## Usage
-Demo: <Link to youtube video>
+## Overview
+(INSERT APP NAME) is a simple but refined media platform where users connect with each other through photo sharing.
 
-<Screenshot of application>
+Security is the most important component of (INSERT NAME). We want to ensure that user content remains secure 
+as it is viewed and commented on by the rest of the internet. To maintain integrity of our app, 
+we require users to create profiles in order to access shared content. User login passwords are secured using 
+bycrpt hashing. 
 
-## How To Run
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+-Finish description with features
 
 ## Diagrams
 
-Sequence Diagram
+Home Page
+![](https://user-images.githubusercontent.com/68174967/172293844-39417f27-f41c-453f-89bd-e25a1716817a.JPG)
 
-Frontend Structure
+Creating a new post
+![](https://user-images.githubusercontent.com/68174967/172293820-473b2b89-54cb-4ad0-b4bf-3777c4c4b9aa.JPG)
+
+Adding a Comment
+![](https://user-images.githubusercontent.com/68174967/172294175-a485c445-fabc-457d-8440-c25e43c68846.JPG)
+
+Viewing all user profiles
+![](https://user-images.githubusercontent.com/68174967/172293872-368b40c8-4e5c-4bbf-8fde-7b0768a24832.JPG)
+
+Editing existing user profile
+![](https://user-images.githubusercontent.com/68174967/172293829-9b62cf9a-16d0-49df-b028-51c332e60883.JPG)
+
+Sign in page
+![](https://user-images.githubusercontent.com/68174967/172293858-df56c215-f9dd-4940-89cc-a4e39d312cef.JPG)
+
+User registration 
+![](https://user-images.githubusercontent.com/68174967/172293868-819b2cde-9b62-409f-ab66-717a084707c4.JPG)
+
+## How To Run
+To run our application, navigate to the `server` and `client` folders in separate terminals.
+
+First, run 
+
+### `npm -i force`
+
+After packages have finished installing, you can run
+
+### `npm start` 
+
+in both folders, and our application should be viewable at [http://localhost:3000](http://localhost:3000)
 
 
-Overall System Diagram
+
+
 
 ## Dependencies
-Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.com/get-npm)
-
+-Finish adding dependencies
