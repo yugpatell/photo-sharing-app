@@ -13,19 +13,28 @@
 <a href="https://github.com/36tofu" target="_blank">Christopher Chen</a>
 
 ## Overview
-(INSERT APP NAME) is a simple but refined media platform where users connect with each other through photo sharing.
+CYD is a simple but refined media platform where users connect with each other through photo sharing. 
+It is hosted by Heroku and is available for usage <a href="https://teamcyd.herokuapp.com/login" target="blank">here</a>
 
-Security is the most important component of (INSERT NAME). We want to ensure that user content remains secure 
+Security is the most important component of CYD. We want to ensure that user content remains secure 
 as it is viewed and commented on by the rest of the internet. To maintain integrity of our app, 
 we require users to create profiles in order to access shared content. User login passwords are secured using 
 bycrpt hashing. 
 
--Finish description with features
+The main features of our application are posting pictures and commenting on other user's posts. However, with a high volume of users, storing and displaying images can become an issue.
+Our solution to handling images efficiently is uploading to a Cloudinary API endpoint, which returns us a URL. This is faster and saves space over storing it directly on our server.
+
+We used Chakra UI to implement most of our styling. A cool feature is that it has baked in dark mode available. You can try this out by clicking the moon / sun on the top left corner!
+
+
 
 ## Diagrams
 
 Home Page
 ![](https://user-images.githubusercontent.com/68174967/172293844-39417f27-f41c-453f-89bd-e25a1716817a.JPG)
+
+Dark Mode
+![](https://user-images.githubusercontent.com/68174967/172300625-0f3fb667-9508-4b8f-9f51-22554f0da43a.JPG)
 
 Creating a new post
 ![](https://user-images.githubusercontent.com/68174967/172293820-473b2b89-54cb-4ad0-b4bf-3777c4c4b9aa.JPG)
@@ -45,14 +54,14 @@ Sign in page
 User registration 
 ![](https://user-images.githubusercontent.com/68174967/172293868-819b2cde-9b62-409f-ab66-717a084707c4.JPG)
 
-## How To Run
-To run our application, navigate to the `server` and `client` folders in separate terminals.
 
-First, run 
 
-### `npm -i force`
+## How To Run Locally
+To run our application, navigate to the `server` and `client` folders in separate terminals and run
 
-After packages have finished installing, you can run
+### `npm i -force`
+
+in both directories. After packages have finished installing, you can run
 
 ### `npm start` 
 
@@ -60,7 +69,24 @@ in both folders, and our application should be viewable at [http://localhost:300
 
 
 
-
-
 ## Dependencies
--Finish adding dependencies
+Server 
+    bcryptjs
+    cors
+    dotenv
+    express
+    express-validator,
+    jsonwebtoken
+    mongoose
+Client
+    chakra-ui
+    emotion
+    axios
+    dateformat
+    framer-motion
+    react
+    react-dom
+    react-router-dom
+    react-scripts
+    web-vitals
+
