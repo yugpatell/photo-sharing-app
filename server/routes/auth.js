@@ -49,7 +49,7 @@ router.post(
       { email: newUser.email },
       `${process.env.JWT_SECRET_KEY}`,
       {
-        expiresIn: "6h",
+        expiresIn: "1h",
       }
     );
     res.status(200).json({
@@ -86,7 +86,7 @@ router.post("/login", async (req, res) => {
     { email: findUser.email },
     `${process.env.JWT_SECRET_KEY}`,
     {
-      expiresIn: "6h",
+      expiresIn: "1h",
     }
   );
 
