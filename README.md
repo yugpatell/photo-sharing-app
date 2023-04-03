@@ -6,10 +6,6 @@
 Try it out at:
 ## https://teamcyd.herokuapp.com/
 
-## Team
-<a href="https://github.com/yugpatell" target="_blank">Yug Patel</a>
-<a href="https://github.com/P-Dhruv20" target="_blank">Dhruv Parmar</a>
-<a href="https://github.com/36tofu" target="_blank">Christopher Chen</a>
 
 Home Page
 ![](https://user-images.githubusercontent.com/68174967/172293844-39417f27-f41c-453f-89bd-e25a1716817a.JPG)
